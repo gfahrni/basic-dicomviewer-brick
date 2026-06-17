@@ -1,0 +1,15 @@
+# pyproject.toml — modern Python project metadata (PEP 621)
+# This file tells pip / build tools about your project so people can
+#     pip install .
+# and get all dependencies automatically.
+
+[project]
+name = "basic-dicomviewer-brick"
+version = "0.1.0"
+description = "A basic building block for DICOM viewer projects in research and development"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy",        # fast array / matrix operations
+    "pydicom",      # read and parse DICOM medical image files
+    "matplotlib",   # 2D plotting library used for the GUI
+]
