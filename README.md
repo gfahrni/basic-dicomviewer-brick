@@ -20,8 +20,8 @@ and development.
 - **DICOM windowing** — reads `WindowCenter` / `WindowWidth` tags for
   optimal grayscale display; falls back to min/max pixel values
 - **Customisable** — colours and slider dimensions in `settings.json`
-- **Flexible layout** — place DICOM files directly in the data folder or
-  organise them in subdirectories (one per series)
+- **Flat or nested folders** — works whether `.dcm` files are directly
+  in the data directory or organised in subdirectories
 
 ---
 
@@ -32,7 +32,7 @@ basic-dicomviewer-brick/
 ├── run.py              # Entry point — handles CLI args, launches viewer
 ├── settings.json       # Configurable constants (colours, layout)
 ├── pyproject.toml      # Project metadata & dependencies
-├── DATA/               # Place your DICOM data here (see "Data layout" below)
+├── DATA/               # Example DICOM datasets (MRI_abdo1, MRI_abdo2)
 └── src/
     ├── __init__.py     # Makes src/ a Python package
     ├── loader.py       # find_series(), load_series() — data discovery & I/O
@@ -76,24 +76,6 @@ pip install numpy pydicom matplotlib
 python run.py                    # opens DATA/ folder
 python run.py /path/to/dicom     # opens a custom folder
 ```
-
-### Data layout
-
-Place your DICOM files inside `DATA/`. Two layouts are supported:
-
-```
-DATA/                          DATA/
-├── scan1.dcm                  ├── series1/
-├── scan2.dcm                  │   ├── 001.dcm
-└── scan3.dcm                  │   ├── 002.dcm
- (flat, one series)            │   └── 003.dcm
-                               └── series2/
-                                   ├── 001.dcm
-                                   └── 002.dcm
-                              (nested, multiple series)
-```
-
-The viewer will auto-detect all series — one per subdirectory or, if files are flat, a single series.
 
 ### Controls
 

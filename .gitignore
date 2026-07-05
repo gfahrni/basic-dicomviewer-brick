@@ -21,3 +21,4 @@ env/
 # DICOM patient data (never commit real medical images)
 DATA/**/*.dcm
 DATA/**/*.DCM
+DATA/MRI_abdo1/
