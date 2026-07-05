@@ -11,5 +11,5 @@ requires-python = ">=3.8"
 dependencies = [
     "numpy",        # fast array / matrix operations
     "pydicom",      # read and parse DICOM medical image files
-    "matplotlib",   # 2D plotting library used for the GUI
+    "PyQt6",        # cross-platform GUI framework (Qt6 bindings)
 ]

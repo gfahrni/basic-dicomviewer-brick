@@ -1,6 +1,6 @@
 # basic-dicomviewer-brick
 
-A lightweight, matplotlib-based GUI to browse DICOM medical image series
+A lightweight, PyQt6-based GUI to browse DICOM medical image series
 slice by slice. Switch between multiple series, scroll through slices,
 and view with proper DICOM windowing (brightness/contrast).
 
@@ -61,12 +61,8 @@ pip install .
 Or install manually:
 
 ```bash
-pip install numpy pydicom matplotlib
+pip install numpy pydicom PyQt6
 ```
-
-> **Note:** The GUI requires a working display (it uses `TkAgg` under the
-> hood). On macOS, Tkinter usually comes with Python. On Linux,
-> install `python3-tk` via your package manager.
 
 ---
 

@@ -10,8 +10,23 @@ independently of the GUI.
 """
 
 import os
-import glob
 import pydicom
+from pydicom.misc import is_dicom
+
+
+def _list_dicom_files(dir_path):
+    """
+    Return all files in *dir_path* that are valid DICOM files,
+    regardless of file extension. Uses pydicom's preamble check
+    (128 zero bytes + "DICM") which is fast and doesn't read the
+    entire file.
+    """
+    files = []
+    for entry in os.listdir(dir_path):
+        full = os.path.join(dir_path, entry)
+        if os.path.isfile(full) and is_dicom(full):
+            files.append(full)
+    return sorted(files)
 
 
 def find_series(data_path):
@@ -42,7 +57,7 @@ def find_series(data_path):
 
     # --- Try flat layout first ------------------------------------------------
     # Look for .dcm files straight in data_path (no subfolders).
-    dcm_files = sorted(glob.glob(os.path.join(data_path, '*.dcm')))
+    dcm_files = _list_dicom_files(data_path)
     if dcm_files:
         # Read just the metadata of the first file (stop_before_pixels=True
         # skips the large pixel array, making this fast).
@@ -69,7 +84,7 @@ def find_series(data_path):
             continue
 
         # Gather .dcm files inside this subdirectory.
-        dcm_files = sorted(glob.glob(os.path.join(subdir, '*.dcm')))
+        dcm_files = _list_dicom_files(subdir)
         if not dcm_files:
             # This subdir has no DICOM files → skip it.
             continue
